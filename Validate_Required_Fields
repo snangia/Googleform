@@ -1,0 +1,7 @@
+Set Googleformspage = Browser("Sample form application").Page("Sample form application")
+	Googleformspage.WebButton("Submit").Click
+	Googleformspage.Check CheckPoint("Verify_Required_email")
+	Googleformspage.Check CheckPoint("Verify_Required_Secondary_email")
+	Googleformspage.Check CheckPoint("Verify_Required_Phone_number")
+	Googleformspage.Check CheckPoint("Verify_Required_ZIP")
+Browser("Sample form application").Navigate "https://forms.gle/4U478yAnzxMeXrdp8"
