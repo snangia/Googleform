@@ -1,0 +1,24 @@
+Set Googleformspage = Browser("Sample form application").Page("Sample form application")
+ 
+		Googleformspage.WebEdit("Your email").Set "sachin"
+	
+	reqEmail = Googleformspage.WebElement("EmailRequired").GetROProperty("outerhtml")
+	
+If 	reqEmail = "<div jsname=""XbIQze"" class=""freebirdFormviewerViewItemsItemErrorMessage"" id=""i2"" role=""alert"">Must be a valid email address</div>" Then
+	Reporter.ReportEvent micPass, "Verify Email Required", " Required Email message sucessfully displayed"
+End  If
+'The checkpoint command below performs similar fucntion as above, only behind the scene.  It is simplly a text checkpoint that looks for the approriate error message
+' I could have data driven this from excel but since there was not much data need for this exercise, I simply hard coded the data for the test below.
+		Googleformspage.Check CheckPoint("Verify_email_format")
+		Googleformspage.WebEdit("Secondary email addres").Set "sachin"
+		Googleformspage.Check CheckPoint("Verify_Second_Email_Format")
+		Googleformspage.WebEdit("Phone number").Set "9172346"
+		Googleformspage.Check CheckPoint("Verify_Phone_Format")
+		Googleformspage.WebEdit("ZIP code").Set "1234"
+		Googleformspage.Check CheckPoint("Verify_ZIP_Format")
+		Googleformspage.WebEdit("ZIP code").Set "123449087"
+		Googleformspage.Check CheckPoint("Verify_Zip_Format2")
+		Googleformspage.WebEdit("ZIP code").Set "12344-234"
+		Googleformspage.Check CheckPoint("Verify_ZIP_Format3")
+		
+'The defect is shown in the report where Secondary email address format is not being validated and it allows the ability to copy and paste the Secondary address.
