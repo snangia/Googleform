@@ -1,0 +1,16 @@
+Set Googleformspage = Browser("Sample form application").Page("Sample form application")
+	Browser("Sample form application").Navigate "https://forms.gle/4U478yAnzxMeXrdp8"
+	Googleformspage.WebEdit("Your email").Set "sachin.nangia@gmail.com"
+	Googleformspage.WebEdit("Secondary email addres").Set "sachin.nangia@gmail.com"
+	Googleformspage.WebEdit("Phone number").Set "917-783-6919" 
+	Googleformspage.WebEdit("ZIP code").Set "10065"
+	Googleformspage.WebButton("Submit").Click
+
+Response = Googleformspage.WebElement("Response").GetROProperty("innertext")
+	
+If 	Response = "Your response has been recorded." Then
+	Reporter.ReportEvent micPass, "Verify Response", "Response was sucessfully recorded"
+End  If
+	
+	Googleformspage.Check CheckPoint("Verify_Confirmation")
+	Browser("Sample form application").Navigate "https://forms.gle/4U478yAnzxMeXrdp8"
